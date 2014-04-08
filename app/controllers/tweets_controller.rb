@@ -4,7 +4,11 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
+    if session[:user_id]
+      @tweets = Tweet.all
+    else
+      redirect_to login_path, notice:  "login to tweet"
+    end
   end
 
   # GET /tweets/1
